@@ -47,5 +47,7 @@ class GroupyTest < ActiveSupport::TestCase
     assert orange.fruit?
     assert orange.orange?
   end
+  
+  # TODO: setup an AR test
 
 end

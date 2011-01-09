@@ -71,6 +71,9 @@ module Groupy
             #{group_values.inspect}.include?(self.#{column_name})
           end
         RUBY
+        if defined?(ActiveRecord) && klass.is_a?(ActiveRecord::Base)
+          klass.scope(group_name, where(column_name => group_values))
+        end
       end
     end
   
