@@ -33,4 +33,11 @@ class GroupyTest < ActiveSupport::TestCase
     assert_instance_of Groupy::OuterGroup, groupy
   end
 
+  test "subgroups" do
+    assert_equal [:healthy, :fruit, :apple, :orange, :rice, :unhealthy, :fried_egg, :bacon].sort_by(&:to_s), Food.groupies[:dish].subgroups.keys.sort_by(&:to_s)
+    assert_equal ["apple", "orange", "rice"], Food.groupies[:dish].subgroups[:healthy]
+    assert_equal ["apple", "orange"],         Food.groupies[:dish].subgroups[:fruit]
+    assert_equal  "apple",                    Food.groupies[:dish].subgroups[:apple]
+  end
+
 end

@@ -34,6 +34,16 @@ module Groupy
       self.sub_groups.map{|g| g.values}.flatten
     end
 
+    def subgroups
+      self.sub_groups.inject({}) do |hash, g|
+        if g.respond_to?(:subgroups)
+          hash.merge!(g.subgroups)
+        end
+        hash[g.name] = g.values
+        hash
+      end
+    end
+
     private
 
     def group(name, &block)
