@@ -15,6 +15,7 @@ module Groupy
 
     def groupy(column, &block)
       container = OuterGroup.new(&block)
+      container.attach!(self, column)
       self.groupies[column] = container
     end
 
@@ -62,6 +63,16 @@ module Groupy
     def initialize(&block)
       super(:all, &block)
     end
+
+    def attach!(klass, column_name)
+      self.subgroups.each do |group_name, group_values|
+        klass.class_eval <<-RUBY
+          def #{group_name}?
+            #{group_values.inspect}.include?(self.#{column_name})
+          end
+        RUBY
+      end
+    end
   
   end
 
@@ -72,7 +83,10 @@ module Groupy
       @value = name.to_s.freeze
     end
     attr_reader :name, :value
-    alias :values :value
+    
+    def values
+      [value]
+    end
 
   end
 
