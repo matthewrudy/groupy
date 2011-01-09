@@ -1,73 +1,32 @@
+require 'active_support/core_ext/class/attribute_accessors'
+
 module Groupy
 
   def self.included(klass)
     klass.class_eval do
       extend ClassMethods
       
-      cattr_accessor :groupy_column
-      self.groupy_column = :code
+      cattr_accessor :groupies
+      self.groupies = {}
     end
   end
 
   module ClassMethods
 
-    def groupy_group(name, &block)
-      group = Group.new(name)
-      self.groupy_scope.sub_groups << group if self.groupy_scope
-
-      with_groupy_scope(group, &block)
-      # define methods after the groupy
-      define_groupy_methods(group)
+    def groupy(column, &block)
+      container = OuterGroup.new(&block)
+      self.groupies[column] = container
     end
 
-    def groupy_value(name)
-      value = Value.new(name)
-      self.groupy_scope.sub_groups << value
-      define_groupy_methods(value)
-    end
-
-    def groupy_scope
-      key = :"#{self}_groupy_scope"
-      Thread.current[key]
-    end
-    
-    def groupy_scope=(value)
-      key = :"#{self}_groupy_scope"
-      Thread.current[key]=value
-    end
-
-    def with_groupy_scope(group)
-      self.groupy_scope, before = group, self.groupy_scope
-      yield
-      self.groupy_scope = before
-    end
-    
-    def define_groupy_methods(group)
-      underscore = group.name.to_s.gsub("::", "").underscore
-      singular_name = "#{underscore}_#{self.groupy_column}"
-      collection_name   = singular_name.pluralize
-      collection_values = group.values.freeze
-      
-      self.scope(collection_name, where(self.groupy_column => collection_values))
-      
-      self.const_set(collection_name.upcase, Array(collection_values).freeze)
-      
-      if group.is_a?(Groupy::Value)
-        self.const_set(singular_name.upcase, collection_values)
-      end
-      
-      define_method("#{singular_name}?") do
-        collection_values.include?(self[self.groupy_column].to_s)
-      end
-    end
-    
   end
 
   class Group
 
-    def initialize(name)
+    def initialize(name, &block)
       @name = name
       @sub_groups = []
+
+      instance_eval(&block)
     end
     attr_reader :name, :sub_groups
  
@@ -75,6 +34,25 @@ module Groupy
       self.sub_groups.map{|g| g.values}.flatten
     end
 
+    private
+
+    def group(name, &block)
+      subgroup = Group.new(name, &block)
+      self.sub_groups << subgroup
+    end
+
+    def value(name)
+      self.sub_groups << Value.new(name)
+    end
+
+  end
+
+  class OuterGroup < Group
+    
+    def initialize(&block)
+      super(:all, &block)
+    end
+  
   end
 
   class Value
