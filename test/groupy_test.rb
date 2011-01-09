@@ -8,8 +8,10 @@ class GroupyTest < ActiveSupport::TestCase
 
     def initialize(dish)
       @dish = dish
+      @spiciness = "small"
     end
     attr_reader :dish
+    attr_reader :spiciness
 
     include Groupy
     groupy :dish do
@@ -25,6 +27,14 @@ class GroupyTest < ActiveSupport::TestCase
         value :fried_egg
         value :bacon
       end
+    end
+
+    # we can have multiple groupies
+    groupy :spiciness do
+      group :wussy do
+        value :small
+      end
+      value :extreme
     end
   end
   
@@ -46,6 +56,11 @@ class GroupyTest < ActiveSupport::TestCase
     assert !orange.rice?
     assert orange.fruit?
     assert orange.orange?
+  
+    # and the second groupy
+    assert orange.wussy?
+    assert orange.small?
+    assert !orange.extreme?
   end
   
   # TODO: setup an AR test
