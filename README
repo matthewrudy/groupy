@@ -1,0 +1,44 @@
+Groupy
+=======
+
+Categorise records into nested groups of values.
+
+Example
+=======
+
+Define our groups
+
+  class Food
+    property :dish, String
+
+    include Groupy
+    groupy :dish do
+      group :healthy do
+        group :fruit do
+          value :apple
+          value :orange
+        end
+        value :rice
+      end
+
+      group :unhealthy do
+        value :fried_egg
+        value :bacon
+      end
+    end
+  end
+
+We can then ask a particular food:
+
+  apple.healthy?
+  apple.fruit?
+  apple.apple?
+
+And we can scope the class by any of these groups
+
+  Food.apple.count
+  Food.fruit.all
+
+B00m!
+
+Copyright (c) 2010 [Matthew Rudy Jacobs], released under the MIT license
