@@ -13,9 +13,9 @@ module Groupy
 
   module ClassMethods
 
-    def groupy(column, &block)
+    def groupy(column, options={}, &block)
       container = OuterGroup.new(&block)
-      container.attach!(self, column)
+      container.attach!(self, column, options)
       self.groupies[column] = container
     end
 
@@ -64,15 +64,21 @@ module Groupy
       super(:all, &block)
     end
 
-    def attach!(klass, column_name)
+    def attach!(klass, column_name, options)
       self.subgroups.each do |group_name, group_values|
+
+        method_name = group_name
+        if options[:prefix]
+          method_name = "#{column_name}_#{group_name}"
+        end
+
         klass.class_eval <<-RUBY
-          def #{group_name}?
+          def #{method_name}?
             #{group_values.inspect}.include?(self.#{column_name})
           end
         RUBY
         if defined?(ActiveRecord) && klass.is_a?(ActiveRecord::Base)
-          klass.scope(group_name, where(column_name => group_values))
+          klass.scope(method_name, where(column_name => group_values))
         end
       end
     end

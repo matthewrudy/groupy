@@ -30,7 +30,7 @@ class GroupyTest < ActiveSupport::TestCase
     end
 
     # we can have multiple groupies
-    groupy :spiciness do
+    groupy :spiciness, :prefix => true do
       group :wussy do
         value :small
       end
@@ -58,9 +58,9 @@ class GroupyTest < ActiveSupport::TestCase
     assert orange.orange?
   
     # and the second groupy
-    assert orange.wussy?
-    assert orange.small?
-    assert !orange.extreme?
+    assert orange.spiciness_wussy?
+    assert orange.spiciness_small?
+    assert !orange.spiciness_extreme?
   end
   
   # TODO: setup an AR test
