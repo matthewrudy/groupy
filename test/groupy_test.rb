@@ -30,12 +30,13 @@ class GroupyTest < ActiveSupport::TestCase
     end
 
     # we can have multiple groupies
-    groupy :spiciness, :prefix => true do
+    groupy :spiciness, :suffix => true do
       group :wussy do
         value :small
       end
       value :extreme
     end
+    
   end
   
   test "groupies" do
@@ -58,9 +59,34 @@ class GroupyTest < ActiveSupport::TestCase
     assert orange.orange?
   
     # and the second groupy
-    assert orange.spiciness_wussy?
-    assert orange.spiciness_small?
-    assert !orange.spiciness_extreme?
+    assert orange.wussy_spiciness?
+    assert orange.small_spiciness?
+    assert !orange.extreme_spiciness?
+  end
+
+  class Thing
+    include Groupy
+
+    def initialize(type)
+      @type = type
+    end
+    attr_reader :type
+    
+    groupy :type do
+      group :number do
+        value :FixNum
+        value "My::FixNum"
+      end
+      value :String
+    end
+  end
+
+  test "underscore value methods" do
+    number = Thing.new("My::FixNum")
+    assert number.number?
+    assert !number.fix_num?
+    assert number.my_fix_num?
+    assert !number.string?
   end
   
   # TODO: setup an AR test

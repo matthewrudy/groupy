@@ -39,6 +39,30 @@ And we can scope the class by any of these groups
   Food.apple.count
   Food.fruit.all
 
+You can also tell groupy to add the column name as a suffix
+
+  class Something
+    groupy :size, :suffix => true do
+      value :small
+      value :medium
+      value :large
+    end
+  end
+
+  something.small_size?
+
+Any values will be lowercased and underscored
+
+  class Something
+    groupy :type do
+      value :SomeClass
+      value :"Namespace::KlassName"
+    end
+  end
+
+  something.some_class?
+  something.namespace_klass_name?  
+  
 B00m!
 
 Copyright (c) 2010 [Matthew Rudy Jacobs], released under the MIT license

@@ -67,9 +67,10 @@ module Groupy
     def attach!(klass, column_name, options)
       self.subgroups.each do |group_name, group_values|
 
-        method_name = group_name
-        if options[:prefix]
-          method_name = "#{column_name}_#{group_name}"
+        method_name = if options[:suffix]
+          "#{group_name}_#{column_name}"
+        else
+          group_name
         end
 
         klass.class_eval <<-RUBY
@@ -88,7 +89,7 @@ module Groupy
   class Value
 
     def initialize(name)
-      @name = name
+      @name  = name.to_s.gsub("::", "").underscore.to_sym
       @value = name.to_s.freeze
     end
     attr_reader :name, :value
