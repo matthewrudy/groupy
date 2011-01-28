@@ -17,6 +17,12 @@ module Groupy
       container = OuterGroup.new(&block)
       container.attach!(self, column, options)
       self.groupies[column] = container
+      
+      self.singleton_class.class_eval <<-RUBY
+        def all_#{column.to_s.pluralize}
+          self.groupies[#{column.inspect}].values
+        end
+      RUBY
     end
 
   end

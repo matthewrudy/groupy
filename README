@@ -38,6 +38,10 @@ And we can scope the class by any of these groups
 
   Food.apple.count
   Food.fruit.all
+  
+We also get a magic "all_" method
+
+  Food.all_dishes
 
 You can also tell groupy to add the column name as a suffix
 

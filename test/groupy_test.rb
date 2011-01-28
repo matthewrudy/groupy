@@ -50,6 +50,10 @@ class GroupyTest < ActiveSupport::TestCase
     assert_equal ["apple", "orange"],         Food.groupies[:dish].subgroups[:fruit]
     assert_equal ["apple"],                   Food.groupies[:dish].subgroups[:apple]
   end
+  
+  test "all_" do
+    assert_equal ["apple", "orange", "rice", "fried_egg", "bacon"].sort, Food.all_dishes.sort
+  end
 
   test "? methods" do
     orange = Food.new("orange")
