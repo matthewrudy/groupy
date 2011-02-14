@@ -32,7 +32,17 @@ module Groupy
     attr_reader :name, :sub_groups
  
     def values
-      self.sub_groups.map{|g| g.values}.flatten
+      value_groups.map{|g| g.value}
+    end
+    
+    def value_groups
+      self.sub_groups.inject([]) do |array, sg|
+        if sg.is_a?(Value)
+          array << sg
+        else
+          array += sg.value_groups
+        end
+      end
     end
 
     def subgroups
@@ -80,6 +90,18 @@ module Groupy
         RUBY
         if defined?(ActiveRecord) && klass.is_a?(ActiveRecord::Base)
           klass.scope(method_name, where(column_name => group_values))
+        end
+      end
+      
+      if options[:constants]
+        self.value_groups.each do |value_group|
+          
+          constant_name = if options[:suffix]
+            "#{value_group.name}_#{column_name}"
+          else
+            value_group.name
+          end
+          klass.const_set("#{constant_name.upcase}", value_group.value)
         end
       end
       

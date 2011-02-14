@@ -30,7 +30,7 @@ class GroupyTest < ActiveSupport::TestCase
     end
 
     # we can have multiple groupies
-    groupy :spiciness, :suffix => true do
+    groupy :spiciness, :suffix => true, :constants => true do
       group :wussy do
         value :small
       end
@@ -67,7 +67,12 @@ class GroupyTest < ActiveSupport::TestCase
     assert orange.small_spiciness?
     assert !orange.extreme_spiciness?
   end
-
+  
+  test "constants" do
+    assert_equal "small",   Food::SMALL_SPICINESS
+    assert_equal "extreme", Food::EXTREME_SPICINESS
+  end
+  
   class Thing
     include Groupy
 

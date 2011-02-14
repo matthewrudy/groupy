@@ -54,6 +54,26 @@ You can also tell groupy to add the column name as a suffix
   end
 
   something.small_size?
+  
+Or you may want to store all the values as a conveniently named constant.
+
+  class Something
+    groupy :size, :constants => true do
+      value :small
+      value :medium
+      value :large
+    end
+  end
+
+  Something::SMALL
+  Something::MEDIUM
+  Something::LARGE
+  
+Or of course you can do both together
+
+  Something::SMALL_SIZE
+  Something::MEDIUM_SIZE
+  Something::LARGE_SIZE
 
 Any values will be lowercased and underscored
 
