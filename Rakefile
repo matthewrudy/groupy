@@ -52,7 +52,7 @@ spec = Gem::Specification.new do |s|
   s.add_dependency("activesupport")
 
   # If your tests use any gems, include them here
-  # s.add_development_dependency("mocha") # for example
+  s.add_development_dependency("activerecord", "sqlite3-ruby")
 end
 
 # This task actually builds the gem. We also regenerate a static
