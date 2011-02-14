@@ -88,8 +88,11 @@ module Groupy
             #{group_values.inspect}.include?(self.#{column_name})
           end
         RUBY
-        if defined?(ActiveRecord) && klass.is_a?(ActiveRecord::Base)
-          klass.scope(method_name, where(column_name => group_values))
+        
+        scope_name = method_name.to_s.pluralize
+        
+        if defined?(ActiveRecord) && klass < ActiveRecord::Base
+          klass.scope(scope_name, klass.where(column_name => group_values))
         end
       end
       
