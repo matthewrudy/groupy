@@ -43,4 +43,9 @@ class WithDatabaseTest < ActiveSupport::TestCase
     assert_equal 1,                Something.medium_sizes.count
   end
   
+  test "subgroup shortcut" do
+    assert_equal ["small", "medium", "large"], Something.sizes(:all)
+    assert_equal ["small"], Something.sizes(:small)
+  end
+  
 end

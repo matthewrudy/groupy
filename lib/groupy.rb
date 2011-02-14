@@ -73,7 +73,11 @@ module Groupy
     def initialize(&block)
       super(:all, &block)
     end
-
+    
+    def subgroups
+      super().merge(:all => self.values)
+    end
+    
     def attach!(klass, column_name, options)
       self.subgroups.each do |group_name, group_values|
 
@@ -110,7 +114,12 @@ module Groupy
       
       klass.class_eval <<-RUBY
         def self.all_#{column_name.to_s.pluralize}
-          self.groupies[#{column_name.inspect}].values
+          self.#{column_name.to_s.pluralize}(:all)
+        end
+        
+        # self.roles(:non_superadmin) => ["some", "list", "of", "roles"]
+        def self.#{column_name.to_s.pluralize}(subgroup_name)
+          self.groupies[#{column_name.inspect}].subgroups[subgroup_name]
         end
       RUBY
     end
