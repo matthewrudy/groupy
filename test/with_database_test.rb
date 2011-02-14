@@ -4,8 +4,8 @@ require 'groupy'
 require 'active_record'
 
 ActiveRecord::Base.establish_connection(
-    :adapter => "sqlite3",
-    :database => ":memory:"
+  :adapter => (RUBY_PLATFORM=="java" ? "jdbcsqlite3" : "sqlite3"),
+  :database => ":memory:"
 )
 
 ActiveRecord::Schema.define(:version => 0) do
