@@ -33,8 +33,8 @@ spec = Gem::Specification.new do |s|
 
   # Change these as appropriate
   s.name              = "groupy"
-  s.version           = "0.1.2"
-  s.summary           = "Categorise with nested groups"
+  s.version           = "0.2.0"
+  s.summary           = "Categorise you records in nested groups with magical scopes automatically created."
   s.author            = "Matthew Rudy Jacobs"
   s.email             = "MatthewRudyJacobs@gmail.com"
   s.homepage          = "https://github.com/matthewrudy/groupy"
