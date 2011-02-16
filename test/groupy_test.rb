@@ -12,7 +12,8 @@ class GroupyTest < ActiveSupport::TestCase
     end
     attr_reader :dish
     attr_reader :spiciness
-
+    attr_reader :smelliness
+    
     include Groupy
     groupy :dish do
       group :healthy do
@@ -35,6 +36,12 @@ class GroupyTest < ActiveSupport::TestCase
         value :small
       end
       value :extreme
+    end
+    
+    # we can do constants without suffices too
+    groupy :smelliness, :constants => true do
+      value :very_smelly
+      value :hardly_smelly
     end
     
   end
@@ -71,6 +78,7 @@ class GroupyTest < ActiveSupport::TestCase
   test "constants" do
     assert_equal "small",   Food::SMALL_SPICINESS
     assert_equal "extreme", Food::EXTREME_SPICINESS
+    assert_equal "very_smelly", Food::VERY_SMELLY
   end
   
   class Thing

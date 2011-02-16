@@ -108,7 +108,7 @@ module Groupy
           else
             value_group.name
           end
-          klass.const_set("#{constant_name.upcase}", value_group.value)
+          klass.const_set("#{constant_name.to_s.upcase}", value_group.value)
         end
       end
       
