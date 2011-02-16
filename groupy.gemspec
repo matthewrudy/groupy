@@ -2,11 +2,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{groupy}
-  s.version = "0.2.2"
+  s.version = "0.2.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Matthew Rudy Jacobs"]
-  s.date = %q{2011-02-14}
+  s.date = %q{2011-02-16}
   s.email = %q{MatthewRudyJacobs@gmail.com}
   s.extra_rdoc_files = ["README"]
   s.files = ["README", "MIT-LICENSE", "Rakefile", "test/groupy_test.rb", "test/test_helper.rb", "test/with_database_test.rb", "lib/groupy.rb"]
