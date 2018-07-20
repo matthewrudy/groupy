@@ -64,20 +64,25 @@ class GroupyTest < ActiveSupport::TestCase
 
   test "? methods" do
     orange = Food.new("orange")
+
+    # not suffixed
     assert orange.healthy?
     assert !orange.rice?
     assert orange.fruit?
     assert orange.orange?
   
-    # and the second groupy
+    # suffixed
     assert orange.wussy_spiciness?
     assert orange.small_spiciness?
     assert !orange.extreme_spiciness?
   end
   
   test "constants" do
+    # suffixed
     assert_equal "small",   Food::SMALL_SPICINESS
     assert_equal "extreme", Food::EXTREME_SPICINESS
+    
+    # not suffixed
     assert_equal "very_smelly", Food::VERY_SMELLY
   end
   
@@ -105,7 +110,4 @@ class GroupyTest < ActiveSupport::TestCase
     assert number.my_fix_num?
     assert !number.string?
   end
-  
-  # TODO: setup an AR test
-
 end
