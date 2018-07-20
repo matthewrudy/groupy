@@ -23,12 +23,14 @@ Gem::Specification.new do |s|
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<activesupport>.freeze, [">= 0"])
       s.add_development_dependency(%q<activerecord>.freeze, [">= 0"])
+      s.add_development_dependency(%q<minitest>.freeze, [">= 0"])
       s.add_development_dependency(%q<rake>.freeze, [">= 0"])
       s.add_development_dependency(%q<rdoc>.freeze, [">= 0"])
       s.add_development_dependency(%q<sqlite3-ruby>.freeze, [">= 0"])
     else
       s.add_dependency(%q<activesupport>.freeze, [">= 0"])
       s.add_dependency(%q<activerecord>.freeze, [">= 0"])
+      s.add_dependency(%q<minitest>.freeze, [">= 0"])
       s.add_dependency(%q<rake>.freeze, [">= 0"])
       s.add_dependency(%q<rdoc>.freeze, [">= 0"])
       s.add_dependency(%q<sqlite3-ruby>.freeze, [">= 0"])
@@ -36,6 +38,7 @@ Gem::Specification.new do |s|
   else
     s.add_dependency(%q<activesupport>.freeze, [">= 0"])
     s.add_dependency(%q<activerecord>.freeze, [">= 0"])
+    s.add_dependency(%q<minitest>.freeze, [">= 0"])
     s.add_dependency(%q<rake>.freeze, [">= 0"])
     s.add_dependency(%q<rdoc>.freeze, [">= 0"])
     s.add_dependency(%q<sqlite3-ruby>.freeze, [">= 0"])
