@@ -51,14 +51,30 @@ class GroupyTest < ActiveSupport::TestCase
   end
 
   test 'subgroups' do
-    assert_equal %i[all healthy fruit apple orange rice unhealthy fried_egg bacon].sort_by(&:to_s), Food.groupies[:dish].subgroups.keys.sort_by(&:to_s)
-    assert_equal %w[apple orange rice], Food.groupies[:dish].subgroups[:healthy]
-    assert_equal %w[apple orange], Food.groupies[:dish].subgroups[:fruit]
+    assert_equal [
+      :all,
+      :healthy,
+      :fruit,
+      :apple,
+      :orange,
+      :rice,
+      :unhealthy,
+      :fried_egg,
+      :bacon
+    ].sort_by(&:to_s), Food.groupies[:dish].subgroups.keys.sort_by(&:to_s)
+    assert_equal ['apple', 'orange', 'rice'], Food.groupies[:dish].subgroups[:healthy]
+    assert_equal ['apple', 'orange'], Food.groupies[:dish].subgroups[:fruit]
     assert_equal ['apple'], Food.groupies[:dish].subgroups[:apple]
   end
 
   test 'all_' do
-    assert_equal %w[apple orange rice fried_egg bacon].sort, Food.all_dishes.sort
+    assert_equal [
+      'apple',
+      'orange',
+      'rice',
+      'fried_egg',
+      'bacon'
+    ].sort, Food.all_dishes.sort
   end
 
   test '? methods' do

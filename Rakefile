@@ -86,6 +86,6 @@ end
 task :package => :gemspec
 
 desc 'Clear out RDoc and generated packages'
-task :clean => %i[clobber_rdoc clobber_package] do
+task :clean => [:clobber_rdoc, :clobber_package] do
   rm "#{spec.name}.gemspec"
 end

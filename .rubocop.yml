@@ -20,3 +20,9 @@ Metrics/PerceivedComplexity:
 
 Style/Documentation:
   Enabled: false
+
+Style/SymbolArray:
+  Enabled: false
+
+Style/WordArray:
+  Enabled: false
