@@ -21,6 +21,9 @@ Metrics/PerceivedComplexity:
 Style/Documentation:
   Enabled: false
 
+Style/ExpandPathArguments:
+  Enabled: false
+
 Style/SymbolArray:
   Enabled: false
 
