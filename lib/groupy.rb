@@ -97,7 +97,11 @@ module Groupy
         scope_name = method_name.to_s.pluralize
         
         if defined?(ActiveRecord) && klass < ActiveRecord::Base
-          klass.scope(scope_name, klass.where(column_name => group_values))
+          klass.class_eval <<-RUBY
+            def self.#{scope_name}
+              where(#{column_name.inspect} => #{group_values.inspect})
+            end
+          RUBY
         end
       end
       

@@ -1,5 +1,3 @@
-require 'rubygems'
-require 'test/unit'
-require 'active_support'
-
-$:.unshift File.expand_path(File.dirname(__FILE__)+"/../lib")
+$LOAD_PATH.unshift File.expand_path("../../lib", __FILE__)
+require "active_support"
+require "minitest/autorun"

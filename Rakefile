@@ -1,6 +1,6 @@
 require 'rake'
 require 'rake/testtask'
-require 'rake/rdoctask'
+require 'rdoc/task'
 
 desc 'Default: run unit tests.'
 task :default => :test
@@ -22,7 +22,7 @@ Rake::RDocTask.new(:rdoc) do |rdoc|
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
 
-require "rake/gempackagetask"
+require 'rubygems/package_task'
 
 # This builds the actual gem. For details of what all these options
 # mean, and other ones you can add, check the documentation here:
@@ -39,7 +39,6 @@ spec = Gem::Specification.new do |s|
   s.email             = "MatthewRudyJacobs@gmail.com"
   s.homepage          = "https://github.com/matthewrudy/groupy"
 
-  s.has_rdoc          = true
   s.extra_rdoc_files  = %w(README)
   s.rdoc_options      = %w(--main README)
 
@@ -53,7 +52,11 @@ spec = Gem::Specification.new do |s|
 
   # If your tests use any gems, include them here
   s.add_development_dependency("activerecord")
+  s.add_development_dependency("minitest")
+  s.add_development_dependency("rake")
+  s.add_development_dependency("rdoc")
   s.add_development_dependency("sqlite3-ruby")
+  s.add_development_dependency("test-unit")
 end
 
 # This task actually builds the gem. We also regenerate a static
@@ -63,7 +66,7 @@ end
 #
 # To publish your gem online, install the 'gemcutter' gem; Read more 
 # about that here: http://gemcutter.org/pages/gem_docs
-Rake::GemPackageTask.new(spec) do |pkg|
+Gem::PackageTask.new(spec) do |pkg|
   pkg.gem_spec = spec
 end
 
