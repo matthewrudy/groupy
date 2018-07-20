@@ -33,7 +33,7 @@ spec = Gem::Specification.new do |s|
 
   # Change these as appropriate
   s.name              = "groupy"
-  s.version           = "0.3.0"
+  s.version           = "0.3.1"
   s.summary           = "Categorise Active Records in nested groups with magical scopes, ? methods, and constants."
   s.author            = "Matthew Rudy Jacobs"
   s.email             = "MatthewRudyJacobs@gmail.com"
