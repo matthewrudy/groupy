@@ -1,4 +1,4 @@
-Groupy
+Groupy [![Build Status](https://travis-ci.org/matthewrudy/groupy.svg?branch=master)](https://travis-ci.org/matthewrudy/groupy)
 =======
 
 Categorise records into nested groups of values.
