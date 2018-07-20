@@ -81,7 +81,7 @@ module Groupy
     
     def attach!(klass, column_name, options)
       self.subgroups.each do |group_name, group_values|
-
+        next if group_name == :all
         method_name = if options[:suffix]
           "#{group_name}_#{column_name}"
         else
