@@ -27,6 +27,7 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<rake>.freeze, [">= 0"])
       s.add_development_dependency(%q<rdoc>.freeze, [">= 0"])
       s.add_development_dependency(%q<sqlite3-ruby>.freeze, [">= 0"])
+      s.add_development_dependency(%q<test-unit>.freeze, [">= 0"])
     else
       s.add_dependency(%q<activesupport>.freeze, [">= 0"])
       s.add_dependency(%q<activerecord>.freeze, [">= 0"])
@@ -34,6 +35,7 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<rake>.freeze, [">= 0"])
       s.add_dependency(%q<rdoc>.freeze, [">= 0"])
       s.add_dependency(%q<sqlite3-ruby>.freeze, [">= 0"])
+      s.add_dependency(%q<test-unit>.freeze, [">= 0"])
     end
   else
     s.add_dependency(%q<activesupport>.freeze, [">= 0"])
@@ -42,5 +44,6 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<rake>.freeze, [">= 0"])
     s.add_dependency(%q<rdoc>.freeze, [">= 0"])
     s.add_dependency(%q<sqlite3-ruby>.freeze, [">= 0"])
+    s.add_dependency(%q<test-unit>.freeze, [">= 0"])
   end
 end
