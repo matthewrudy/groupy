@@ -52,6 +52,7 @@ spec = Gem::Specification.new do |s|
 
   # If your tests use any gems, include them here
   s.add_development_dependency("activerecord")
+  s.add_development_dependency("rake")
   s.add_development_dependency("rdoc")
   s.add_development_dependency("sqlite3-ruby")
 end
