@@ -15,4 +15,15 @@ gemfile:
   - gemfiles/Gemfile.rails-4.0
   - gemfiles/Gemfile.rails-5.0
 
-script: bundle exec rspec spec
+matrix:
+  exclude:
+  - rvm: 1.9.2
+    gemfile: gemfiles/Gemfile.rails-5.0
+  - rvm: 1.9.3
+    gemfile: gemfiles/Gemfile.rails-5.0
+  - rvm: 2.0
+    gemfile: gemfiles/Gemfile.rails-5.0
+  - rvm: 2.1
+    gemfile: gemfiles/Gemfile.rails-5.0
+
+script: bundle exec rake test
