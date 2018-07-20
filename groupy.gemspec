@@ -10,10 +10,10 @@ Gem::Specification.new do |s|
   s.authors = ["Matthew Rudy Jacobs".freeze]
   s.date = "2018-07-20"
   s.email = "MatthewRudyJacobs@gmail.com".freeze
-  s.extra_rdoc_files = ["README".freeze]
-  s.files = ["MIT-LICENSE".freeze, "README".freeze, "Rakefile".freeze, "lib/groupy.rb".freeze, "test/groupy_test.rb".freeze, "test/test_helper.rb".freeze, "test/with_database_test.rb".freeze]
+  s.extra_rdoc_files = ["README.md".freeze]
+  s.files = ["MIT-LICENSE".freeze, "README.md".freeze, "Rakefile".freeze, "lib/groupy.rb".freeze, "test/groupy_test.rb".freeze, "test/test_helper.rb".freeze, "test/with_database_test.rb".freeze]
   s.homepage = "https://github.com/matthewrudy/groupy".freeze
-  s.rdoc_options = ["--main".freeze, "README".freeze]
+  s.rdoc_options = ["--main".freeze, "README.md".freeze]
   s.rubygems_version = "2.7.7".freeze
   s.summary = "Categorise Active Records in nested groups with magical scopes, ? methods, and constants.".freeze
 

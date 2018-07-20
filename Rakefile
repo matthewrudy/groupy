@@ -39,11 +39,11 @@ spec = Gem::Specification.new do |s|
   s.email             = "MatthewRudyJacobs@gmail.com"
   s.homepage          = "https://github.com/matthewrudy/groupy"
 
-  s.extra_rdoc_files  = %w(README)
-  s.rdoc_options      = %w(--main README)
+  s.extra_rdoc_files  = %w(README.md)
+  s.rdoc_options      = %w(--main README.md)
 
   # Add any extra files to include in the gem
-  s.files             = %w(README MIT-LICENSE Rakefile) + Dir.glob("{test,lib}/**/*")
+  s.files             = %w(README.md MIT-LICENSE Rakefile) + Dir.glob("{test,lib}/**/*")
   s.require_paths     = ["lib"]
 
   # If you want to depend on other gems, add them here, along with any
